@@ -1,0 +1,37 @@
+apply plugin: 'groovy'
+//添加maven plugin, 用于发布我们的jar
+apply plugin: 'maven'
+
+dependencies {
+//    compile gradleApi()
+//    compile localGroovy()
+//    compile 'org.codehaus.groovy:groovy-all:2.3.6'
+//    compile 'org.javassist:javassist:3.20.0-GA'
+    compile gradleApi()//gradle sdk
+    compile localGroovy()//groovy sdk
+    compile 'com.android.tools.build:gradle:3.1.3'
+    compile 'org.javassist:javassist:3.20.0-GA'
+    compile 'org.aspectj:aspectjtools:1.8.1'
+}
+
+repositories {
+    mavenCentral()
+}
+
+//设置maven deployer
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: uri('../rep1'))
+            //设置插件的GAV参数
+            pom.groupId = 'com.transsnet.aspectj'
+            //pom.artifactId = 'cooker-plugin'
+            pom.artifactId = 'gradleplugin'
+            pom.version = 1.0
+            //文件发布到下面目录
+
+
+        }
+    }
+}
+
